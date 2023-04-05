@@ -1,5 +1,19 @@
 {
   "expo": {
+    "android": {
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "*.myapp.io",
+              "pathPrefix": "/records"
+            }
+          ]
+        }
+      ]
+    },
     "scheme": "acme",
     "web": {
       "bundler": "metro"

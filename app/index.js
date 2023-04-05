@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   View,
   Text,
   FlatList,
   TouchableOpacity,
-  ScrollView,
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
@@ -146,8 +145,8 @@ const Data = {
   ],
 };
 
-const HomeScreen = ({ navigate }) => {
-  const router = useRouter();
+const HomeScreen = () => {
+  const navigation = useNavigation();
   const renderRestaurant = ({ item }) => {
     return (
       <View style={styles.restaurantBox}>
@@ -156,17 +155,10 @@ const HomeScreen = ({ navigate }) => {
           data={item.menu}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => router.push(`/menu_details/${item}`, item)}
+              onPress={() => navigation.navigate('MenuDetails', { item })}
               style={styles.menuItemBox}
             >
               <Text style={styles.menuItemName}>{item.name}</Text>
-              {/* <Text style={styles.menuItemDescription}>{item.description}</Text>
-              <Text style={styles.menuItemIngredients}>
-                {item.ingredients.join(', ')}
-              </Text>
-              <Text style={styles.menuItemPrice}>
-                {'₹' + item.price.toFixed(2)}
-              </Text> */}
             </TouchableOpacity>
           )}
           keyExtractor={(item) => item.id.toString()}
@@ -176,14 +168,14 @@ const HomeScreen = ({ navigate }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Menu</Text>
       <FlatList
         data={Data.restaurants}
         renderItem={renderRestaurant}
         keyExtractor={(item) => item.name}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
