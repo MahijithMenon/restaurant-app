@@ -72,7 +72,7 @@ const Data = {
       name: 'Sushi Palace',
       menu: [
         {
-          id: 1,
+          id: 4,
           name: 'Rainbow Roll',
           description:
             'California roll topped with tuna, salmon, shrimp, and avocado',
@@ -87,14 +87,14 @@ const Data = {
           ],
         },
         {
-          id: 2,
+          id: 5,
           name: 'Spicy Tuna Roll',
           description: 'Tuna and spicy mayo rolled in sushi rice and seaweed',
           price: 12.99,
           ingredients: ['sushi rice', 'nori', 'tuna', 'spicy mayo'],
         },
         {
-          id: 3,
+          id: 6,
           name: 'Teriyaki Chicken',
           description:
             'Grilled chicken with teriyaki sauce, served with rice and vegetables',
@@ -112,7 +112,7 @@ const Data = {
       name: 'Taco Town',
       menu: [
         {
-          id: 1,
+          id: 7,
           name: 'Beef Tacos',
           description:
             'Soft tortillas filled with seasoned ground beef, lettuce, and cheese',
@@ -126,7 +126,7 @@ const Data = {
           ],
         },
         {
-          id: 2,
+          id: 8,
           name: 'Chicken Quesadilla',
           description:
             'Flour tortilla filled with grilled chicken, cheese, and peppers, served with sour cream and guacamole',
@@ -154,8 +154,20 @@ const HomeScreen = () => {
         <FlatList
           data={item.menu}
           renderItem={({ item }) => (
+            // <TouchableOpacity
+            //   onPress={() =>
+            //     navigation.navigate('MenuDetails', JSON.stringify(item))
+            //   }
+            //   style={styles.menuItemBox}
+            // >
             <TouchableOpacity
-              onPress={() => navigation.navigate('MenuDetails', { item })}
+              onPress={() =>
+                navigation.navigate('MenuDetails', {
+                  itemID: item.id,
+                  item: JSON.stringify(item),
+                  state: { item: item },
+                })
+              }
               style={styles.menuItemBox}
             >
               <Text style={styles.menuItemName}>{item.name}</Text>
